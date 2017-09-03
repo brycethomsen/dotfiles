@@ -1,0 +1,16 @@
+atom
+bash-completion
+chromium
+docker
+firefox
+go
+gparted
+htop
+lastpass-cli
+nmap
+openssh
+python-pip
+rsync
+tmux
+vim
+yaourt
