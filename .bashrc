@@ -12,9 +12,9 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
 
   # brew env
-  PATH=/usr/local/bin:/usr/local/sbin:$PATH
-  PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
-  PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
+  export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+  export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+  export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
 
   # Virtualenvwrapper config
   #export WORKON_HOME=$HOME/.virtualenvs
@@ -29,8 +29,10 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   fi
 
   # GoLang
-  PATH=/usr/local/go/bin:$PATH
-  PATH=~/go/bin:$PATH
+  export GOPATH=$HOME/go
+  export GOROOT=/usr/local/opt/go/libexec
+  export PATH=$PATH:$GOPATH/bin
+  export PATH=$PATH:$GOROOT/bin
 
   # Kubectl
   KUBECONFIG=$(find ~/.kube/kube.d/* | awk '{out=(NR==1) ? $1 : out":"$1} END{print out}')
@@ -58,9 +60,9 @@ parse_git_branch() {
 }
 
 # Kubectl context for prompt
-get_kube_context() {
-  kubectl config current-context | awk -F '.' '{print $1}'
-}
+# get_kube_context() {
+#   kubectl config current-context | awk -F '.' '{print $1}'
+# }
 
 # ssh agent
 if [ -z "$SSH_AUTH_SOCK" ] ; then
@@ -73,7 +75,7 @@ export HISTSIZE=
 export HISTFILESIZE=
 
 # AWS
-PATH=~/.local/bin:$PATH
+# PATH=~/.local/bin:$PATH
 alias role='aws sts get-caller-identity'
 export AWS_HOME=~/.aws
 function agp {
@@ -92,9 +94,9 @@ function asp {
   fi
 }
 
-export PATH
+#export PATH
 #Prompt
-export PS1="\[\033[0;36m\]\$(get_kube_context)\[\033[33m\] \$(parse_git_branch) \[\033[32m\]\w\[\033[00m\] $ "
+export PS1="\$(parse_git_branch) \[\033[32m\]\w\[\033[00m\] $ "
 
 #bash log
 export PROMPT_COMMAND='echo -en "\033];${PWD##*/}\007"; if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'
