@@ -44,7 +44,7 @@ fi
 # TMUX
 if [[ -z "$TMUX" ]] ;then
     # get the id of a deattached session
-    ID="`tmux ls | grep -vm1 attached | cut -d: -f1`"
+    ID="`tmux ls | grep attached | cut -d: -f1`"
     # if not available create a new one
     if [[ -z "$ID" ]] ;then
         tmux new-session
@@ -104,4 +104,8 @@ export PROMPT_COMMAND='echo -en "\033];${PWD##*/}\007"; if [ "$(id -u)" -ne 0 ];
 # Load Aliases
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
+fi
+
+if [ -f ~/.concur_aliases ]; then
+  . ~/.concur_aliases
 fi

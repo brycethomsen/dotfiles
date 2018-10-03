@@ -3,7 +3,7 @@ alias ga='git add'
 alias gb='git branch'
 alias gc='git checkout'
 alias gd='git diff'
-alias gl='git log'
+alias gl='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias gt='git tag'
 alias gp='git pull'
 alias gs='git status'
@@ -20,7 +20,7 @@ alias pipup='pip3 freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 p
 # dockerized utilities
 alias ctop='docker run -ti  --rm -v /var/run/docker.sock:/var/run/docker.sock quay.io/vektorlab/ctop:latest'
 alias wee='docker run -it -e TZ=America/Los_Angeles -v "${HOME}/.weechat:/home/user/.weechat" wee-slack'
-alias aws-shell="docker run -it --rm -v $HOME/.aws/:/root/.aws aws-shell"
+#alias aws-shell="docker run -it --rm -v $HOME/.aws/:/root/.aws aws-shell"
 alias docker_drift="docker run -it --rm --privileged --pid=host debian nsenter -t 1 -m -u -n -i date -u $(date -u +%m%d%H%M%Y)"
 # alias meta='~/git/ec2metadata-role-assumption/setup.sh; make daemon -C ~/git/ec2metadata-role-assumption'
 #alias aws='docker run --rm -v "$(ls -d ~/.aws):/root/.aws" -it brycetho/stevedore:aws aws'
@@ -41,22 +41,6 @@ alias ubuntu="docker run -it --rm -v `pwd`:/shared ubuntu:latest /bin/bash"
 if [[ "$platform" == 'Linux' ]]; then
   alias update='sudo apt update && apt upgrade -y && apt autoremove'
 elif [[ "$platform" == 'Darwin' ]]; then
-  alias update="brew update && brew upgrade && && brew cask upgrade && brew cask cleanup && brew cleanup && osascript -e 'display notification \"Update finished\" with title \"Brew\"'"
+  alias update="brew update && brew upgrade && brew cask upgrade && brew cleanup"
   #alias update='sudo softwareupdate -ia'
 fi
-
-### Concur utilities ###
-# AWS Auth
-alias aws-singapore="make renew -C ~/git/resources/auth ARGS='-e aws-cn-poc -r aws-cn-poc-iopsSystems'"
-alias aws-nonporod="make renew -C ~/git/resources/auth ARGS='-e da-nonprod-comm -r da-nonprod-comm-RETeam'"
-alias aws-emea="make renew -C ~/git/resources/auth ARGS='-e da-eu-prod-comm -r da-eu-prod-comm_Admins'"
-alias aws-qa="make renew -C ~/container/aws-okta-auth ARGS='-a 0oa3nt2v27BnZBxMg0x7/272 -o concurasp -u bthomsen -n aws-qa_k8Admins'"
-alias aws-dev="make renew -C ~/git/resources/auth ARGS='-e aws-dev -r aws-dev_iopsSystems'"
-alias aws-da-prod="make renew -C ~/git/resources/auth ARGS='-e da-us-prod-comm -r aws-da-us-prod-comm_superAdmins'"
-# K8s
-alias get2gs="echo -e '127.0.0.1\tseags1am.cnqr.delivery' | sudo tee --append /etc/hosts > /dev/null; ssh -L 9443:seags1am.cnqr.delivery:443 seags1bast001 -N"
-# Utils
-alias lint="docker run -it -v `pwd`:/lint/ quay.cnqr.delivery/da-iam/images:2-python-lint"
-alias lint3="docker run -it -v $PWD:/lint/ quay.cnqr.delivery/da-iam/images:3-python-lint"
-alias helm-client="docker run -it --rm -v ~/.kube/kube.d/kubeconfig-t17a.us-west-2.nonprod:/kubeconf/t17a -v $PWD:/helm -w /helm -e KUBECONFIG=/kubeconf/t17a quay.cnqr.delivery/containerhosting/helm-client"
-#function kn() { kubectl config set-context ${kubectl config current-context} --namespace=$1 ; }
