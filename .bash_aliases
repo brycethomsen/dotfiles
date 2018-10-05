@@ -38,8 +38,10 @@ alias alpine="docker run -it --rm -v `pwd`:/shared alpine:latest /bin/sh"
 alias ubuntu="docker run -it --rm -v `pwd`:/shared ubuntu:latest /bin/bash"
 
 ### OS Specific ###
-if [[ "$platform" == 'Linux' ]]; then
+if [[ "$distro" == 'ubuntu' ]]; then
   alias update='sudo apt update && apt upgrade -y && apt autoremove'
+elif [[ "$distro" == 'arch' ]]; then
+  alias update='sudo pacman -Syu && flatpak update'
 elif [[ "$platform" == 'Darwin' ]]; then
   alias update="brew update && brew upgrade && brew cask upgrade && brew cleanup"
   #alias update='sudo softwareupdate -ia'

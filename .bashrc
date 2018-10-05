@@ -2,6 +2,7 @@
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   platform='Linux'
+  distro=`cat /etc/os-release | grep ID= | awk -F "=" '{ print $2 }'`
   # Arch autocomplete
   complete -c man which
 
