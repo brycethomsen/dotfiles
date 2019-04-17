@@ -1,4 +1,4 @@
-# git - aliases
+# git
 alias ga='git add'
 alias gb='git branch'
 alias gc='git checkout'
@@ -10,7 +10,7 @@ alias gs='git status'
 alias gcm='git commit -m'
 alias gpo='git push origin'
 
-# docker - aliases
+# docker
 alias dm='docker-machine'
 alias dc='docker-compose'
 
