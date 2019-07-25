@@ -1,4 +1,4 @@
-# TMUX CHEATSHEET
+# TMUX Cheatsheet
 
 ```
 prefix = Ctrl + a
