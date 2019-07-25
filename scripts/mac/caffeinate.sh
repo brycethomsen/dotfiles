@@ -1,18 +1,19 @@
 #!/bin/bash
-
+set -x
 IP=$(/sbin/ifconfig | /usr/local/bin/ggrep -E -o '10\.(171|252)\.[0-9]{1,3}\.[0-9]{1,3}' | head -n 1)
+PROC=$(ps aux | grep 'caffeinate' | awk '{print $2}')
 
 if [ -z "$IP" ]
   then
-    kill $(ps aux | grep 'caffeinate' | awk '{print $2}')
+    kill $PROC
   else
-    if [ $(ps aux | grep 'caffeinate' | awk '{print $2}' | wc -l) -gt 1 ]
+   echo $PROC
+    if [ $(echo $PROC | wc -w) -gt 3 ]
       then
-        exit 0
+        :
       else
         /usr/bin/osascript -e 'display notification "caffeinating... ☕️" with title "Cron"'
         caffeinate -id &
-        exit 0
     fi
 fi
 
