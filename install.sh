@@ -4,7 +4,7 @@ set -e
 
 if [[ "$OSTYPE" == 'linux-gnu' ]]; then
     echo 'LINUX'
-elif [[ "$OSTYPE" == 'darwin17' ]]; then
+elif [[ "$OSTYPE" == 'darwin18' ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew bundle packages/mac/Brewfile
 fi
