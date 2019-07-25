@@ -1,1 +1,1 @@
-*/30 * * * * /Users/i863328/scripts/caffeinate.sh >> /Users/i863328/scripts/log/caffeinate.log 2>&1
+*/30 * * * * $HOME/scripts/caffeinate.sh >> $HOME/scripts/log/caffeinate.log 2>&1
