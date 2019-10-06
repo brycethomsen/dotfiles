@@ -39,9 +39,9 @@ alias ubuntu="docker run -it --rm -v `pwd`:/shared ubuntu:latest /bin/bash"
 
 ### OS Specific ###
 if [[ "$distro" == 'ubuntu' ]]; then
-  alias update='sudo apt update && apt upgrade -y && apt autoremove'
+  alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove && sudo flatpak update'
 elif [[ "$distro" == 'arch' ]]; then
-  alias update='sudo pacman -Syu && flatpak update'
+  alias update='sudo pacman -Syu && sudo flatpak update'
 elif [[ "$platform" == 'Darwin' ]]; then
   alias update="brew update && brew upgrade && brew cask upgrade && brew cleanup"
   #alias update='sudo softwareupdate -ia'
